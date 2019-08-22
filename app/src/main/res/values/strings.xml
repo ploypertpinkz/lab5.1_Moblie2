@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">CarPlace</string>
+    <string name="car_text">Car Park</string>
+    <string name="car_one">Park 1 : Available</string>
+    <string name="car_two">Park 2 : Available</string>
+    <string name="car_three">Park 3 : Available</string>
+    <string name="update_car_button">Update</string>
+    <string name="delete_car_button">Delete</string>
+    <string name="car_name_txt">Name</string>
+    <string name="car_num_text">Car Number</string>
+    <string name="car_brand_text">Car Brand</string>
+</resources>
