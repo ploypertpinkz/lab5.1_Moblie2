@@ -1,660 +1,422 @@
 package buu.informatics.s59160587.carplace
 
 import android.content.Context
+import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_main.*
+import buu.informatics.s59160587.carplace.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        car_one_button.setOnClickListener {
-            addCarOne()
+        binding.apply {
+            carOneButton.setOnClickListener {
+                addCarOne()
+            }
+
+            carTwoButton.setOnClickListener {
+                addCarTwo()
+            }
+
+            carThreeButton.setOnClickListener {
+                addCarThree()
+            }
+
+            updateOneButton.setOnClickListener {
+                updateCarOne(it)
+            }
+
+            updateTwoButton.setOnClickListener {
+                updateCarTwo(it)
+            }
+
+            updateThreeButton.setOnClickListener {
+                updateCarThree(it)
+            }
+
+            deleteOneButton.setOnClickListener {
+                deleteCarOne()
+            }
+
+            deleteTwoButton.setOnClickListener {
+                deleteCarTwo()
+            }
+
+            deleteThreeButton.setOnClickListener {
+                deleteCarThree()
+            }
         }
-
-        car_two_button.setOnClickListener {
-            addCarTwo()
-        }
-
-        car_three_button.setOnClickListener {
-            addCarThree()
-        }
-
-        updateOne_button.setOnClickListener {
-            updateCarOne(it)
-        }
-
-        updateTwo_button.setOnClickListener {
-            updateCarTwo(it)
-        }
-
-        updateThree_button.setOnClickListener {
-            updateCarThree(it)
-        }
-
-        deleteOne_button.setOnClickListener {
-            deleteCarOne()
-        }
-
-        deleteTwo_button.setOnClickListener {
-            deleteCarTwo()
-        }
-
-        deleteThree_button.setOnClickListener {
-            deleteCarThree()
-        }
-
     }
 
     private fun updateCarOne(view: View) {
-        val textPage = findViewById<TextView>(R.id.carpark_text)
 
-        val buttonCarOne = findViewById<Button>(R.id.car_one_button)
-        val buttonCarTwo = findViewById<Button>(R.id.car_two_button)
-        val buttonCarThree= findViewById<Button>(R.id.car_three_button)
-        //Park1
-        val editCarName1 = findViewById<EditText>(R.id.carNameOne_edit)
-        val editCarNum1 = findViewById<EditText>(R.id.carNumOne_edit)
-        val editCarBrand1 = findViewById<EditText>(R.id.carBrandOne_edit)
+        binding.apply {
+            carparkText.text = "Car Park"
 
-        val buttonUpdate1 = findViewById<Button>(R.id.updateOne_button)
-        val buttonDelete1 = findViewById<Button>(R.id.deleteOne_button)
+            carOneButton.visibility =  View.VISIBLE
+            carOneButton.text = "Park 1 : unavailable"
+            carTwoButton.visibility = View.VISIBLE
+            carThreeButton.visibility = View.VISIBLE
 
-        //Park2
-        val editCarName2 = findViewById<EditText>(R.id.carNameTwo_edit)
-        val editCarNum2 = findViewById<EditText>(R.id.carNumTwo_edit)
-        val editCarBrand2 = findViewById<EditText>(R.id.carBrandTwo_edit)
+            //Park1
+            carNameOneEdit.visibility = View.GONE
+            carNumOneEdit.visibility = View.GONE
+            carBrandOneEdit.visibility = View.GONE
 
-        val buttonUpdate2 = findViewById<Button>(R.id.updateTwo_button)
-        val buttonDelete2 = findViewById<Button>(R.id.deleteTwo_button)
+            updateOneButton.visibility = View.GONE
+            deleteOneButton.visibility = View.GONE
 
-        //Park3
-        val editCarName3 = findViewById<EditText>(R.id.carNameThree_edit)
-        val editCarNum3 = findViewById<EditText>(R.id.carNumThree_edit)
-        val editCarBrand3 = findViewById<EditText>(R.id.carBrandThree_edit)
+            //Park2
+            carNameTwoEdit.visibility = View.GONE
+            carNumTwoEdit.visibility = View.GONE
+            carBrandTwoEdit.visibility = View.GONE
 
-        val buttonUpdate3 = findViewById<Button>(R.id.updateThree_button)
-        val buttonDelete3 = findViewById<Button>(R.id.deleteThree_button)
+            updateTwoButton.visibility = View.GONE
+            deleteTwoButton.visibility = View.GONE
 
-        textPage.text = "Car Park"
+            //Park3
+            carNameThreeEdit.visibility = View.GONE
+            carNumThreeEdit.visibility = View.GONE
+            carBrandThreeEdit.visibility = View.GONE
 
-        buttonCarOne.visibility =  View.VISIBLE
-        buttonCarOne.text = "Park 1 : unavailable"
-        buttonCarTwo.visibility = View.VISIBLE
-        buttonCarThree.visibility = View.VISIBLE
+            updateThreeButton.visibility = View.GONE
+            deleteThreeButton.visibility = View.GONE
 
-        //Park1
-        editCarName1.visibility = View.GONE
-        editCarNum1.visibility = View.GONE
-        editCarBrand1.visibility = View.GONE
-
-        buttonUpdate1.visibility = View.GONE
-        buttonDelete1.visibility = View.GONE
-
-        //Park2
-        editCarName2.visibility = View.GONE
-        editCarNum2.visibility = View.GONE
-        editCarBrand2.visibility = View.GONE
-
-        buttonUpdate2.visibility = View.GONE
-        buttonDelete2.visibility = View.GONE
-
-        //Park3
-        editCarName3.visibility = View.GONE
-        editCarNum3.visibility = View.GONE
-        editCarBrand3.visibility = View.GONE
-
-        buttonUpdate3.visibility = View.GONE
-        buttonDelete3.visibility = View.GONE
-
-        val inputMethodManger = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManger.hideSoftInputFromWindow(view.windowToken, 0)
-
-    }
+            val inputMethodManger = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManger.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+}
 
     private fun updateCarTwo(view: View) {
-        val textPage = findViewById<TextView>(R.id.carpark_text)
 
-        val buttonCarOne = findViewById<Button>(R.id.car_one_button)
-        val buttonCarTwo = findViewById<Button>(R.id.car_two_button)
-        val buttonCarThree= findViewById<Button>(R.id.car_three_button)
-        //Park1
-        val editCarName1 = findViewById<EditText>(R.id.carNameOne_edit)
-        val editCarNum1 = findViewById<EditText>(R.id.carNumOne_edit)
-        val editCarBrand1 = findViewById<EditText>(R.id.carBrandOne_edit)
+        binding.apply {
+            carparkText.text = "Car Park"
 
-        val buttonUpdate1 = findViewById<Button>(R.id.updateOne_button)
-        val buttonDelete1 = findViewById<Button>(R.id.deleteOne_button)
+            carOneButton.visibility =  View.VISIBLE
+            carTwoButton.visibility = View.VISIBLE
+            carTwoButton.text = "Park 2 : unavailable"
+            carThreeButton.visibility = View.VISIBLE
 
-        //Park2
-        val editCarName2 = findViewById<EditText>(R.id.carNameTwo_edit)
-        val editCarNum2 = findViewById<EditText>(R.id.carNumTwo_edit)
-        val editCarBrand2 = findViewById<EditText>(R.id.carBrandTwo_edit)
+            //Park1
+            carNameOneEdit.visibility = View.GONE
+            carNumOneEdit.visibility = View.GONE
+            carBrandOneEdit.visibility = View.GONE
 
-        val buttonUpdate2 = findViewById<Button>(R.id.updateTwo_button)
-        val buttonDelete2 = findViewById<Button>(R.id.deleteTwo_button)
+            updateOneButton.visibility = View.GONE
+            deleteOneButton.visibility = View.GONE
 
-        //Park3
-        val editCarName3 = findViewById<EditText>(R.id.carNameThree_edit)
-        val editCarNum3 = findViewById<EditText>(R.id.carNumThree_edit)
-        val editCarBrand3 = findViewById<EditText>(R.id.carBrandThree_edit)
+            //Park2
+            carNameTwoEdit.visibility = View.GONE
+            carNumTwoEdit.visibility = View.GONE
+            carBrandTwoEdit.visibility = View.GONE
 
-        val buttonUpdate3 = findViewById<Button>(R.id.updateThree_button)
-        val buttonDelete3 = findViewById<Button>(R.id.deleteThree_button)
+            updateTwoButton.visibility = View.GONE
+            deleteTwoButton.visibility = View.GONE
 
-        textPage.text = "Car Park"
+            //Park3
+            carNameThreeEdit.visibility = View.GONE
+            carNumThreeEdit.visibility = View.GONE
+            carBrandThreeEdit.visibility = View.GONE
 
-        buttonCarOne.visibility =  View.VISIBLE
-        buttonCarTwo.visibility = View.VISIBLE
-        buttonCarTwo.text = "Park 2 : unavailable"
-        buttonCarThree.visibility = View.VISIBLE
+            updateThreeButton.visibility = View.GONE
+            deleteThreeButton.visibility = View.GONE
 
-        //Park1
-        editCarName1.visibility = View.GONE
-        editCarNum1.visibility = View.GONE
-        editCarBrand1.visibility = View.GONE
+            val inputMethodManger = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManger.hideSoftInputFromWindow(view.windowToken, 0)
+        }
 
-        buttonUpdate1.visibility = View.GONE
-        buttonDelete1.visibility = View.GONE
-
-        //Park2
-        editCarName2.visibility = View.GONE
-        editCarNum2.visibility = View.GONE
-        editCarBrand2.visibility = View.GONE
-
-        buttonUpdate2.visibility = View.GONE
-        buttonDelete2.visibility = View.GONE
-
-        //Park3
-        editCarName3.visibility = View.GONE
-        editCarNum3.visibility = View.GONE
-        editCarBrand3.visibility = View.GONE
-
-        buttonUpdate3.visibility = View.GONE
-        buttonDelete3.visibility = View.GONE
-
-        val inputMethodManger = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManger.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     private fun updateCarThree(view: View) {
-        val textPage = findViewById<TextView>(R.id.carpark_text)
 
-        val buttonCarOne = findViewById<Button>(R.id.car_one_button)
-        val buttonCarTwo = findViewById<Button>(R.id.car_two_button)
-        val buttonCarThree= findViewById<Button>(R.id.car_three_button)
-        //Park1
-        val editCarName1 = findViewById<EditText>(R.id.carNameOne_edit)
-        val editCarNum1 = findViewById<EditText>(R.id.carNumOne_edit)
-        val editCarBrand1 = findViewById<EditText>(R.id.carBrandOne_edit)
+        binding.apply {
+            carparkText.text = "Car Park"
 
-        val buttonUpdate1 = findViewById<Button>(R.id.updateOne_button)
-        val buttonDelete1 = findViewById<Button>(R.id.deleteOne_button)
+            carOneButton.visibility =  View.VISIBLE
+            carTwoButton.visibility = View.VISIBLE
+            carThreeButton.visibility = View.VISIBLE
+            carThreeButton.text = "Park 3 : unavailable"
 
-        //Park2
-        val editCarName2 = findViewById<EditText>(R.id.carNameTwo_edit)
-        val editCarNum2 = findViewById<EditText>(R.id.carNumTwo_edit)
-        val editCarBrand2 = findViewById<EditText>(R.id.carBrandTwo_edit)
+            //Park1
+            carNameOneEdit.visibility = View.GONE
+            carNumOneEdit.visibility = View.GONE
+            carBrandOneEdit.visibility = View.GONE
 
-        val buttonUpdate2 = findViewById<Button>(R.id.updateTwo_button)
-        val buttonDelete2 = findViewById<Button>(R.id.deleteTwo_button)
+            updateOneButton.visibility = View.GONE
+            deleteOneButton.visibility = View.GONE
 
-        //Park3
-        val editCarName3 = findViewById<EditText>(R.id.carNameThree_edit)
-        val editCarNum3 = findViewById<EditText>(R.id.carNumThree_edit)
-        val editCarBrand3 = findViewById<EditText>(R.id.carBrandThree_edit)
+            //Park2
+            carNameTwoEdit.visibility = View.GONE
+            carNumTwoEdit.visibility = View.GONE
+            carBrandTwoEdit.visibility = View.GONE
 
-        val buttonUpdate3 = findViewById<Button>(R.id.updateThree_button)
-        val buttonDelete3 = findViewById<Button>(R.id.deleteThree_button)
+            updateTwoButton.visibility = View.GONE
+            deleteTwoButton.visibility = View.GONE
 
-        textPage.text = "Car Park"
+            //Park3
+            carNameThreeEdit.visibility = View.GONE
+            carNumThreeEdit.visibility = View.GONE
+            carBrandThreeEdit.visibility = View.GONE
 
-        buttonCarOne.visibility =  View.VISIBLE
-        buttonCarTwo.visibility = View.VISIBLE
-        buttonCarThree.visibility = View.VISIBLE
-        buttonCarThree.text = "Park 3 : unavailable"
+            updateThreeButton.visibility = View.GONE
+            deleteThreeButton.visibility = View.GONE
 
-        //Park1
-        editCarName1.visibility = View.GONE
-        editCarNum1.visibility = View.GONE
-        editCarBrand1.visibility = View.GONE
-
-        buttonUpdate1.visibility = View.GONE
-        buttonDelete1.visibility = View.GONE
-
-        //Park2
-        editCarName2.visibility = View.GONE
-        editCarNum2.visibility = View.GONE
-        editCarBrand2.visibility = View.GONE
-
-        buttonUpdate2.visibility = View.GONE
-        buttonDelete2.visibility = View.GONE
-
-        //Park3
-        editCarName3.visibility = View.GONE
-        editCarNum3.visibility = View.GONE
-        editCarBrand3.visibility = View.GONE
-
-        buttonUpdate3.visibility = View.GONE
-        buttonDelete3.visibility = View.GONE
-
-        val inputMethodManger = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManger.hideSoftInputFromWindow(view.windowToken, 0)
+            val inputMethodManger = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManger.hideSoftInputFromWindow(view.windowToken, 0)
+        }
     }
 
     private fun deleteCarOne() {
-        val textPage = findViewById<TextView>(R.id.carpark_text)
 
-        val buttonCarOne = findViewById<Button>(R.id.car_one_button)
-        val buttonCarTwo = findViewById<Button>(R.id.car_two_button)
-        val buttonCarThree= findViewById<Button>(R.id.car_three_button)
-        //Park1
-        val editCarName1 = findViewById<EditText>(R.id.carNameOne_edit)
-        val editCarNum1 = findViewById<EditText>(R.id.carNumOne_edit)
-        val editCarBrand1 = findViewById<EditText>(R.id.carBrandOne_edit)
+        binding.apply {
+            carparkText.text = "Car Park"
 
-        val buttonUpdate1 = findViewById<Button>(R.id.updateOne_button)
-        val buttonDelete1 = findViewById<Button>(R.id.deleteOne_button)
+            carOneButton.visibility =  View.VISIBLE
+            carOneButton.text = "Park 1 : available"
+            carTwoButton.visibility = View.VISIBLE
+            carThreeButton.visibility = View.VISIBLE
 
-        //Park2
-        val editCarName2 = findViewById<EditText>(R.id.carNameTwo_edit)
-        val editCarNum2 = findViewById<EditText>(R.id.carNumTwo_edit)
-        val editCarBrand2 = findViewById<EditText>(R.id.carBrandTwo_edit)
+            //Park1
+            carNameOneEdit.visibility = View.GONE
+            carNumOneEdit.visibility = View.GONE
+            carBrandOneEdit.visibility = View.GONE
+            carNameOneEdit.text.clear()
+            carNumOneEdit.text.clear()
+            carBrandOneEdit.text.clear()
 
-        val buttonUpdate2 = findViewById<Button>(R.id.updateTwo_button)
-        val buttonDelete2 = findViewById<Button>(R.id.deleteTwo_button)
+            updateOneButton.visibility = View.GONE
+            deleteOneButton.visibility = View.GONE
 
-        //Park3
-        val editCarName3 = findViewById<EditText>(R.id.carNameThree_edit)
-        val editCarNum3 = findViewById<EditText>(R.id.carNumThree_edit)
-        val editCarBrand3 = findViewById<EditText>(R.id.carBrandThree_edit)
+            //Park2
+            carNameTwoEdit.visibility = View.GONE
+            carNumTwoEdit.visibility = View.GONE
+            carBrandTwoEdit.visibility = View.GONE
 
-        val buttonUpdate3 = findViewById<Button>(R.id.updateThree_button)
-        val buttonDelete3 = findViewById<Button>(R.id.deleteThree_button)
+            updateTwoButton.visibility = View.GONE
+            deleteTwoButton.visibility = View.GONE
 
-        textPage.text = "Car Park"
+            //Park3
+            carNameThreeEdit.visibility = View.GONE
+            carNumThreeEdit.visibility = View.GONE
+            carBrandThreeEdit.visibility = View.GONE
 
-        buttonCarOne.visibility =  View.VISIBLE
-        buttonCarOne.text = "Park 1 : available"
-        buttonCarTwo.visibility = View.VISIBLE
-        buttonCarThree.visibility = View.VISIBLE
-
-        //Park1
-        editCarName1.visibility = View.GONE
-        editCarNum1.visibility = View.GONE
-        editCarBrand1.visibility = View.GONE
-        editCarName1.text.clear()
-        editCarNum1.text.clear()
-        editCarBrand1.text.clear()
-
-        buttonUpdate1.visibility = View.GONE
-        buttonDelete1.visibility = View.GONE
-
-        //Park2
-        editCarName2.visibility = View.GONE
-        editCarNum2.visibility = View.GONE
-        editCarBrand2.visibility = View.GONE
-
-        buttonUpdate2.visibility = View.GONE
-        buttonDelete2.visibility = View.GONE
-
-        //Park3
-        editCarName3.visibility = View.GONE
-        editCarNum3.visibility = View.GONE
-        editCarBrand3.visibility = View.GONE
-
-        buttonUpdate3.visibility = View.GONE
-        buttonDelete3.visibility = View.GONE
+            updateThreeButton.visibility = View.GONE
+            deleteThreeButton.visibility = View.GONE
+        }
     }
 
     private fun deleteCarTwo() {
-        val textPage = findViewById<TextView>(R.id.carpark_text)
 
-        val buttonCarOne = findViewById<Button>(R.id.car_one_button)
-        val buttonCarTwo = findViewById<Button>(R.id.car_two_button)
-        val buttonCarThree= findViewById<Button>(R.id.car_three_button)
-        //Park1
-        val editCarName1 = findViewById<EditText>(R.id.carNameOne_edit)
-        val editCarNum1 = findViewById<EditText>(R.id.carNumOne_edit)
-        val editCarBrand1 = findViewById<EditText>(R.id.carBrandOne_edit)
+        binding.apply {
+            carparkText.text = "Car Park"
 
-        val buttonUpdate1 = findViewById<Button>(R.id.updateOne_button)
-        val buttonDelete1 = findViewById<Button>(R.id.deleteOne_button)
+            carOneButton.visibility =  View.VISIBLE
+            carTwoButton.visibility = View.VISIBLE
+            carTwoButton.text = "Park 2 : available"
+            carThreeButton.visibility = View.VISIBLE
 
-        //Park2
-        val editCarName2 = findViewById<EditText>(R.id.carNameTwo_edit)
-        val editCarNum2 = findViewById<EditText>(R.id.carNumTwo_edit)
-        val editCarBrand2 = findViewById<EditText>(R.id.carBrandTwo_edit)
+            //Park1
+            carNameOneEdit.visibility = View.GONE
+            carNumOneEdit.visibility = View.GONE
+            carBrandOneEdit.visibility = View.GONE
 
-        val buttonUpdate2 = findViewById<Button>(R.id.updateTwo_button)
-        val buttonDelete2 = findViewById<Button>(R.id.deleteTwo_button)
+            updateOneButton.visibility = View.GONE
+            deleteOneButton.visibility = View.GONE
 
-        //Park3
-        val editCarName3 = findViewById<EditText>(R.id.carNameThree_edit)
-        val editCarNum3 = findViewById<EditText>(R.id.carNumThree_edit)
-        val editCarBrand3 = findViewById<EditText>(R.id.carBrandThree_edit)
+            //Park2
+            carNameTwoEdit.visibility = View.GONE
+            carNumTwoEdit.visibility = View.GONE
+            carBrandTwoEdit.visibility = View.GONE
 
-        val buttonUpdate3 = findViewById<Button>(R.id.updateThree_button)
-        val buttonDelete3 = findViewById<Button>(R.id.deleteThree_button)
+            carNameTwoEdit.text.clear()
+            carNumTwoEdit.text.clear()
+            carBrandTwoEdit.text.clear()
 
-        textPage.text = "Car Park"
+            updateTwoButton.visibility = View.GONE
+            deleteTwoButton.visibility = View.GONE
 
-        buttonCarOne.visibility =  View.VISIBLE
-        buttonCarTwo.visibility = View.VISIBLE
-        buttonCarTwo.text = "Park 2 : available"
-        buttonCarThree.visibility = View.VISIBLE
+            //Park3
+            carNameThreeEdit.visibility = View.GONE
+            carNumThreeEdit.visibility = View.GONE
+            carBrandThreeEdit.visibility = View.GONE
 
-        //Park1
-        editCarName1.visibility = View.GONE
-        editCarNum1.visibility = View.GONE
-        editCarBrand1.visibility = View.GONE
-
-        buttonUpdate1.visibility = View.GONE
-        buttonDelete1.visibility = View.GONE
-
-        //Park2
-        editCarName2.visibility = View.GONE
-        editCarNum2.visibility = View.GONE
-        editCarBrand2.visibility = View.GONE
-
-        editCarName2.text.clear()
-        editCarNum2.text.clear()
-        editCarBrand2.text.clear()
-
-        buttonUpdate2.visibility = View.GONE
-        buttonDelete2.visibility = View.GONE
-
-        //Park3
-        editCarName3.visibility = View.GONE
-        editCarNum3.visibility = View.GONE
-        editCarBrand3.visibility = View.GONE
-
-        buttonUpdate3.visibility = View.GONE
-        buttonDelete3.visibility = View.GONE
+            updateThreeButton.visibility = View.GONE
+            deleteThreeButton.visibility = View.GONE
+        }
     }
 
     private fun deleteCarThree() {
-        val textPage = findViewById<TextView>(R.id.carpark_text)
 
-        val buttonCarOne = findViewById<Button>(R.id.car_one_button)
-        val buttonCarTwo = findViewById<Button>(R.id.car_two_button)
-        val buttonCarThree= findViewById<Button>(R.id.car_three_button)
-        //Park1
-        val editCarName1 = findViewById<EditText>(R.id.carNameOne_edit)
-        val editCarNum1 = findViewById<EditText>(R.id.carNumOne_edit)
-        val editCarBrand1 = findViewById<EditText>(R.id.carBrandOne_edit)
+        binding.apply {
+            carparkText.text = "Car Park"
 
-        val buttonUpdate1 = findViewById<Button>(R.id.updateOne_button)
-        val buttonDelete1 = findViewById<Button>(R.id.deleteOne_button)
+            carOneButton.visibility =  View.VISIBLE
+            carTwoButton.visibility = View.VISIBLE
+            carThreeButton.visibility = View.VISIBLE
+            carThreeButton.text = "Park 3 : available"
 
-        //Park2
-        val editCarName2 = findViewById<EditText>(R.id.carNameTwo_edit)
-        val editCarNum2 = findViewById<EditText>(R.id.carNumTwo_edit)
-        val editCarBrand2 = findViewById<EditText>(R.id.carBrandTwo_edit)
+            //Park1
+            carNameOneEdit.visibility = View.GONE
+            carNumOneEdit.visibility = View.GONE
+            carBrandOneEdit.visibility = View.GONE
 
-        val buttonUpdate2 = findViewById<Button>(R.id.updateTwo_button)
-        val buttonDelete2 = findViewById<Button>(R.id.deleteTwo_button)
+            updateOneButton.visibility = View.GONE
+            deleteOneButton.visibility = View.GONE
 
-        //Park3
-        val editCarName3 = findViewById<EditText>(R.id.carNameThree_edit)
-        val editCarNum3 = findViewById<EditText>(R.id.carNumThree_edit)
-        val editCarBrand3 = findViewById<EditText>(R.id.carBrandThree_edit)
+            //Park2
+            carNameTwoEdit.visibility = View.GONE
+            carNumTwoEdit.visibility = View.GONE
+            carBrandTwoEdit.visibility = View.GONE
 
-        val buttonUpdate3 = findViewById<Button>(R.id.updateThree_button)
-        val buttonDelete3 = findViewById<Button>(R.id.deleteThree_button)
+            updateTwoButton.visibility = View.GONE
+            deleteTwoButton.visibility = View.GONE
 
-        textPage.text = "Car Park"
+            //Park3
+            carNameThreeEdit.visibility = View.GONE
+            carNumThreeEdit.visibility = View.GONE
+            carBrandThreeEdit.visibility = View.GONE
 
-        buttonCarOne.visibility =  View.VISIBLE
-        buttonCarTwo.visibility = View.VISIBLE
-        buttonCarThree.visibility = View.VISIBLE
-        buttonCarThree.text = "Park 3 : available"
+            carNameThreeEdit.text.clear()
+            carNumThreeEdit.text.clear()
+            carBrandThreeEdit.text.clear()
 
-        //Park1
-        editCarName1.visibility = View.GONE
-        editCarNum1.visibility = View.GONE
-        editCarBrand1.visibility = View.GONE
-
-        buttonUpdate1.visibility = View.GONE
-        buttonDelete1.visibility = View.GONE
-
-        //Park2
-        editCarName2.visibility = View.GONE
-        editCarNum2.visibility = View.GONE
-        editCarBrand2.visibility = View.GONE
-
-        buttonUpdate2.visibility = View.GONE
-        buttonDelete2.visibility = View.GONE
-
-        //Park3
-        editCarName3.visibility = View.GONE
-        editCarNum3.visibility = View.GONE
-        editCarBrand3.visibility = View.GONE
-
-        editCarName3.text.clear()
-        editCarNum3.text.clear()
-        editCarBrand3.text.clear()
-
-        buttonUpdate3.visibility = View.GONE
-        buttonDelete3.visibility = View.GONE
+            updateThreeButton.visibility = View.GONE
+            deleteThreeButton.visibility = View.GONE
+        }
     }
 
     private fun addCarOne() {
-        val textPage = findViewById<TextView>(R.id.carpark_text)
+        binding.apply {
+            carparkText.text = "Park 1"
 
-        val buttonCarOne = findViewById<Button>(R.id.car_one_button)
-        val buttonCarTwo = findViewById<Button>(R.id.car_two_button)
-        val buttonCarThree= findViewById<Button>(R.id.car_three_button)
-        //Park1
-        val editCarName1 = findViewById<EditText>(R.id.carNameOne_edit)
-        val editCarNum1 = findViewById<EditText>(R.id.carNumOne_edit)
-        val editCarBrand1 = findViewById<EditText>(R.id.carBrandOne_edit)
+            carOneButton.visibility =  View.GONE
+            carTwoButton.visibility = View.GONE
+            carThreeButton.visibility = View.GONE
 
-        val buttonUpdate1 = findViewById<Button>(R.id.updateOne_button)
-        val buttonDelete1 = findViewById<Button>(R.id.deleteOne_button)
+            //Park1
+            carNameOneEdit.visibility = View.VISIBLE
+            carNumOneEdit.visibility = View.VISIBLE
+            carBrandOneEdit.visibility = View.VISIBLE
 
-        //Park2
-        val editCarName2 = findViewById<EditText>(R.id.carNameTwo_edit)
-        val editCarNum2 = findViewById<EditText>(R.id.carNumTwo_edit)
-        val editCarBrand2 = findViewById<EditText>(R.id.carBrandTwo_edit)
+            updateOneButton.visibility = View.VISIBLE
+            deleteOneButton.visibility = View.VISIBLE
 
-        val buttonUpdate2 = findViewById<Button>(R.id.updateTwo_button)
-        val buttonDelete2 = findViewById<Button>(R.id.deleteTwo_button)
+            //Park2
+            carNameTwoEdit.visibility = View.GONE
+            carNumTwoEdit.visibility = View.GONE
+            carBrandTwoEdit.visibility = View.GONE
 
-        //Park3
-        val editCarName3 = findViewById<EditText>(R.id.carNameThree_edit)
-        val editCarNum3 = findViewById<EditText>(R.id.carNumThree_edit)
-        val editCarBrand3 = findViewById<EditText>(R.id.carBrandThree_edit)
+            updateTwoButton.visibility = View.GONE
+            deleteTwoButton.visibility = View.GONE
 
-        val buttonUpdate3 = findViewById<Button>(R.id.updateThree_button)
-        val buttonDelete3 = findViewById<Button>(R.id.deleteThree_button)
+            //Park3
+            carNameThreeEdit.visibility = View.GONE
+            carNumThreeEdit.visibility = View.GONE
+            carBrandThreeEdit.visibility = View.GONE
 
-        textPage.text = "Park 1"
+            updateThreeButton.visibility = View.GONE
+            deleteThreeButton.visibility = View.GONE
 
-        buttonCarOne.visibility =  View.GONE
-        buttonCarTwo.visibility = View.GONE
-        buttonCarThree.visibility = View.GONE
+            val inm1 = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inm1.showSoftInput(carNameOneEdit, 0)
 
-        //Park1
-        editCarName1.visibility = View.VISIBLE
-        editCarNum1.visibility = View.VISIBLE
-        editCarBrand1.visibility = View.VISIBLE
+            val inm2 = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inm2.showSoftInput(carNumOneEdit, 0)
 
-        buttonUpdate1.visibility = View.VISIBLE
-        buttonDelete1.visibility = View.VISIBLE
-
-        //Park2
-        editCarName2.visibility = View.GONE
-        editCarNum2.visibility = View.GONE
-        editCarBrand2.visibility = View.GONE
-
-        buttonUpdate2.visibility = View.GONE
-        buttonDelete2.visibility = View.GONE
-
-        //Park3
-        editCarName3.visibility = View.GONE
-        editCarNum3.visibility = View.GONE
-        editCarBrand3.visibility = View.GONE
-
-        buttonUpdate3.visibility = View.GONE
-        buttonDelete3.visibility = View.GONE
-
-        val inm1 = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inm1.showSoftInput(editCarName1, 0)
-
-        val inm2 = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inm2.showSoftInput(editCarNum1, 0)
-
-        val inm3 = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inm3.showSoftInput(editCarBrand1, 0)
-
+            val inm3 = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inm3.showSoftInput(carBrandOneEdit, 0)
+        }
     }
     private fun addCarTwo() {
-        val textPage = findViewById<TextView>(R.id.carpark_text)
+        binding.apply {
+            carparkText.text = "Park 2"
 
-        val buttonCarOne = findViewById<Button>(R.id.car_one_button)
-        val buttonCarTwo = findViewById<Button>(R.id.car_two_button)
-        val buttonCarThree= findViewById<Button>(R.id.car_three_button)
-        //Park1
-        val editCarName1 = findViewById<EditText>(R.id.carNameOne_edit)
-        val editCarNum1 = findViewById<EditText>(R.id.carNumOne_edit)
-        val editCarBrand1 = findViewById<EditText>(R.id.carBrandOne_edit)
+            carOneButton.visibility =  View.GONE
+            carTwoButton.visibility = View.GONE
+            carThreeButton.visibility = View.GONE
 
-        val buttonUpdate1 = findViewById<Button>(R.id.updateOne_button)
-        val buttonDelete1 = findViewById<Button>(R.id.deleteOne_button)
+            //Park1
+            carNameOneEdit.visibility = View.GONE
+            carNumOneEdit.visibility = View.GONE
+            carBrandOneEdit.visibility = View.GONE
 
-        //Park2
-        val editCarName2 = findViewById<EditText>(R.id.carNameTwo_edit)
-        val editCarNum2 = findViewById<EditText>(R.id.carNumTwo_edit)
-        val editCarBrand2 = findViewById<EditText>(R.id.carBrandTwo_edit)
+            updateOneButton.visibility = View.GONE
+            deleteOneButton.visibility = View.GONE
 
-        val buttonUpdate2 = findViewById<Button>(R.id.updateTwo_button)
-        val buttonDelete2 = findViewById<Button>(R.id.deleteTwo_button)
+            //Park2
+            carNameTwoEdit.visibility = View.VISIBLE
+            carNumTwoEdit.visibility = View.VISIBLE
+            carBrandTwoEdit.visibility = View.VISIBLE
 
-        //Park3
-        val editCarName3 = findViewById<EditText>(R.id.carNameThree_edit)
-        val editCarNum3 = findViewById<EditText>(R.id.carNumThree_edit)
-        val editCarBrand3 = findViewById<EditText>(R.id.carBrandThree_edit)
+            updateTwoButton.visibility = View.VISIBLE
+            deleteTwoButton.visibility = View.VISIBLE
 
-        val buttonUpdate3 = findViewById<Button>(R.id.updateThree_button)
-        val buttonDelete3 = findViewById<Button>(R.id.deleteThree_button)
+            //Park3
+            carNameThreeEdit.visibility = View.GONE
+            carNumThreeEdit.visibility = View.GONE
+            carBrandThreeEdit.visibility = View.GONE
 
-        textPage.text = "Park 2"
+            updateThreeButton.visibility = View.GONE
+            deleteThreeButton.visibility = View.GONE
 
-        buttonCarOne.visibility =  View.GONE
-        buttonCarTwo.visibility = View.GONE
-        buttonCarThree.visibility = View.GONE
+            val inm1 = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inm1.showSoftInput(carNameTwoEdit, 0)
 
-        //Park1
-        editCarName1.visibility = View.GONE
-        editCarNum1.visibility = View.GONE
-        editCarBrand1.visibility = View.GONE
+            val inm2 = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inm2.showSoftInput(carNumTwoEdit, 0)
 
-        buttonUpdate1.visibility = View.GONE
-        buttonDelete1.visibility = View.GONE
-
-        //Park2
-        editCarName2.visibility = View.VISIBLE
-        editCarNum2.visibility = View.VISIBLE
-        editCarBrand2.visibility = View.VISIBLE
-
-        buttonUpdate2.visibility = View.VISIBLE
-        buttonDelete2.visibility = View.VISIBLE
-
-        //Park3
-        editCarName3.visibility = View.GONE
-        editCarNum3.visibility = View.GONE
-        editCarBrand3.visibility = View.GONE
-
-        buttonUpdate3.visibility = View.GONE
-        buttonDelete3.visibility = View.GONE
-
-        val inm1 = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inm1.showSoftInput(editCarName2, 0)
-
-        val inm2 = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inm2.showSoftInput(editCarNum2, 0)
-
-        val inm3 = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inm3.showSoftInput(editCarBrand2, 0)
+            val inm3 = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inm3.showSoftInput(carBrandTwoEdit, 0)
+        }
     }
 
-    private fun addCarThree(){
-        val textPage = findViewById<TextView>(R.id.carpark_text)
+    private fun addCarThree() {
+        binding.apply {
+            carparkText.text = "Park 3"
 
-        val buttonCarOne = findViewById<Button>(R.id.car_one_button)
-        val buttonCarTwo = findViewById<Button>(R.id.car_two_button)
-        val buttonCarThree= findViewById<Button>(R.id.car_three_button)
-        //Park1
-        val editCarName1 = findViewById<EditText>(R.id.carNameOne_edit)
-        val editCarNum1 = findViewById<EditText>(R.id.carNumOne_edit)
-        val editCarBrand1 = findViewById<EditText>(R.id.carBrandOne_edit)
+            carOneButton.visibility =  View.GONE
+            carTwoButton.visibility = View.GONE
+            carThreeButton.visibility = View.GONE
 
-        val buttonUpdate1 = findViewById<Button>(R.id.updateOne_button)
-        val buttonDelete1 = findViewById<Button>(R.id.deleteOne_button)
+            //Park1
+            carNameOneEdit.visibility = View.GONE
+            carNumOneEdit.visibility = View.GONE
+            carBrandOneEdit.visibility = View.GONE
 
-        //Park2
-        val editCarName2 = findViewById<EditText>(R.id.carNameTwo_edit)
-        val editCarNum2 = findViewById<EditText>(R.id.carNumTwo_edit)
-        val editCarBrand2 = findViewById<EditText>(R.id.carBrandTwo_edit)
+            updateOneButton.visibility = View.GONE
+            deleteOneButton.visibility = View.GONE
 
-        val buttonUpdate2 = findViewById<Button>(R.id.updateTwo_button)
-        val buttonDelete2 = findViewById<Button>(R.id.deleteTwo_button)
+            //Park2
+            carNameTwoEdit.visibility = View.GONE
+            carNumTwoEdit.visibility = View.GONE
+            carBrandTwoEdit.visibility = View.GONE
 
-        //Park3
-        val editCarName3 = findViewById<EditText>(R.id.carNameThree_edit)
-        val editCarNum3 = findViewById<EditText>(R.id.carNumThree_edit)
-        val editCarBrand3 = findViewById<EditText>(R.id.carBrandThree_edit)
+            updateTwoButton.visibility = View.GONE
+            deleteTwoButton.visibility = View.GONE
 
-        val buttonUpdate3 = findViewById<Button>(R.id.updateThree_button)
-        val buttonDelete3 = findViewById<Button>(R.id.deleteThree_button)
+            //Park3
+            carNameThreeEdit.visibility = View.VISIBLE
+            carNumThreeEdit.visibility = View.VISIBLE
+            carBrandThreeEdit.visibility = View.VISIBLE
 
-        textPage.text = "Park 3"
+            updateThreeButton.visibility = View.VISIBLE
+            deleteThreeButton.visibility = View.VISIBLE
 
-        buttonCarOne.visibility =  View.GONE
-        buttonCarTwo.visibility = View.GONE
-        buttonCarThree.visibility = View.GONE
+            val inm1 = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inm1.showSoftInput(carNameThreeEdit, 0)
 
-        //Park1
-        editCarName1.visibility = View.GONE
-        editCarNum1.visibility = View.GONE
-        editCarBrand1.visibility = View.GONE
+            val inm2 = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inm2.showSoftInput(carNumThreeEdit, 0)
 
-        buttonUpdate1.visibility = View.GONE
-        buttonDelete1.visibility = View.GONE
-
-        //Park2
-        editCarName2.visibility = View.GONE
-        editCarNum2.visibility = View.GONE
-        editCarBrand2.visibility = View.GONE
-
-        buttonUpdate2.visibility = View.GONE
-        buttonDelete2.visibility = View.GONE
-
-        //Park3
-        editCarName3.visibility = View.VISIBLE
-        editCarNum3.visibility = View.VISIBLE
-        editCarBrand3.visibility = View.VISIBLE
-
-        buttonUpdate3.visibility = View.VISIBLE
-        buttonDelete3.visibility = View.VISIBLE
-
-        val inm1 = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inm1.showSoftInput(editCarName3, 0)
-
-        val inm2 = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inm2.showSoftInput(editCarNum3, 0)
-
-        val inm3 = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inm3.showSoftInput(editCarBrand3, 0)
+            val inm3 = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inm3.showSoftInput(carBrandThreeEdit, 0)
+        }
     }
 
 }
