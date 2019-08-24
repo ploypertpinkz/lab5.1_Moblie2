@@ -9,7 +9,11 @@ import android.view.inputmethod.InputMethodManager
 import buu.informatics.s59160587.carplace.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    //biding data
     private lateinit var binding: ActivityMainBinding
+
+    //carClass
+    private val carPage: CarClass = CarClass("Car Park")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +56,8 @@ class MainActivity : AppCompatActivity() {
                 deleteCarThree()
             }
         }
+
+        binding.carPage = carPage
     }
 
     private fun updateCarOne(view: View) {
