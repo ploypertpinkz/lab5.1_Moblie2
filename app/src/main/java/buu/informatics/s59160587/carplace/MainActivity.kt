@@ -271,7 +271,7 @@ class MainActivity : AppCompatActivity() {
             carOneButton.visibility =  View.VISIBLE
             carTwoButton.visibility = View.VISIBLE
             carThreeButton.visibility = View.VISIBLE
-            carThreeButton.text = "Park 3 : available"
+            carThreeButton.text = "Park 3 : availables"
             carThreeButton.setBackgroundResource(R.color.colorAccent)
 
             //Park1
