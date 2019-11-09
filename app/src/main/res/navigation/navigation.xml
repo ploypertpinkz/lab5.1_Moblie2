@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/navigation"
+        app:startDestination="@id/loginFragment">
+
+    <activity
+            android:id="@+id/mainActivity"
+            android:name="buu.informatics.s59160587.carplace.MainActivity"
+            android:label="MainActivity" />
+    <fragment
+            android:id="@+id/loginFragment"
+            android:name="buu.informatics.s59160587.carplace.loginFragment"
+            android:label="fragment_login"
+            tools:layout="@layout/fragment_login" >
+        <action
+                android:id="@+id/action_loginFragment_to_infoFragment"
+                app:destination="@id/infoFragment" />
+        <action
+                android:id="@+id/action_loginFragment_to_mainActivity"
+                app:destination="@id/mainActivity"
+                app:popUpTo="@+id/mainActivity" />
+    </fragment>
+    <fragment
+            android:id="@+id/infoFragment"
+            android:name="buu.informatics.s59160587.carplace.infoFragment"
+            android:label="fragment_info"
+            tools:layout="@layout/fragment_info" />
+</navigation>

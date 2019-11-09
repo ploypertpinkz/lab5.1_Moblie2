@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.navigation.findNavController
 import buu.informatics.s59160587.carplace.databinding.ActivityMainBinding
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     //biding data
@@ -20,9 +22,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+        //Back Button
+//        val navController = this.findNavController(R.id.mainActivity)
+//        NavigationUI.setupActionBarWithNavController(this,navController)
+
         binding.apply {
             carOneButton.setOnClickListener {
-                addCarOne()
+                    addCarOne()
             }
 
             carTwoButton.setOnClickListener {
@@ -60,6 +66,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.carPage = carPage
     }
+
+//    override fun onSupportNavigateUp(): Boolean {
+//        val navController = this.findNavController(R.id.mainActivity)
+//        return navController.navigateUp()
+//    }
 
     private fun updateCarOne(view: View) {
 
@@ -271,7 +282,7 @@ class MainActivity : AppCompatActivity() {
             carOneButton.visibility =  View.VISIBLE
             carTwoButton.visibility = View.VISIBLE
             carThreeButton.visibility = View.VISIBLE
-            carThreeButton.text = "Park 3 : availables"
+            carThreeButton.text = "Park 3 : available"
             carThreeButton.setBackgroundResource(R.color.colorAccent)
 
             //Park1

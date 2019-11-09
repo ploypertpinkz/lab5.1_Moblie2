@@ -9,4 +9,7 @@
     <string name="car_name_txt">Name</string>
     <string name="car_num_text">Car Number</string>
     <string name="car_brand_text">Car Brand</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
